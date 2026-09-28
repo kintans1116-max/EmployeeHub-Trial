@@ -1,106 +1,83 @@
 
+
 /* ========================================
    EMPLOYEEHUB - REQUEST MANAGEMENT
-   Pengajuan karyawan dan persetujuan HR
 ======================================== */
 
 const REQUEST_STORAGE_KEY = "employeeHubRequests";
 
-document.addEventListener("DOMContentLoaded", function () {
-    initRequests();
-});
+document.addEventListener("DOMContentLoaded", initRequests);
 
 function initRequests() {
-    const user = typeof getCurrentUser === "function"
-        ? getCurrentUser()
-        : null;
+    const user = getCurrentUser();
 
     if (!user) return;
 
-    const requestForm = document.getElementById("requestForm");
-    const employeeRequests = document.getElementById("employeeRequests");
-    const approvalRequests = document.getElementById("approvalRequests");
+    const form = document.getElementById("requestForm");
+    const employeeTable = document.getElementById("employeeRequests");
+    const approvalTable = document.getElementById("approvalRequests");
 
-    if (requestForm) {
-        requestForm.addEventListener("submit", handleRequestSubmit);
+    if (form && user.role === "employee") {
+        form.addEventListener("submit", handleRequestSubmit);
     }
 
-    if (employeeRequests) {
+    if (employeeTable && user.role === "employee") {
         renderEmployeeRequests(user.employeeId);
     }
 
-    if (approvalRequests && user.role === "admin") {
+    if (approvalTable && user.role === "admin") {
+        approvalTable.addEventListener("click", handleApprovalAction);
         renderApprovalRequests();
-        approvalRequests.addEventListener(
-            "click",
-            handleApprovalAction
-        );
     }
 }
 
-// Membaca data pengajuan dari browser.
 function getRequestRecords() {
     try {
-        const data = localStorage.getItem(REQUEST_STORAGE_KEY);
-        const records = data ? JSON.parse(data) : [];
+        const data = JSON.parse(
+            localStorage.getItem(REQUEST_STORAGE_KEY) || "[]"
+        );
 
-        return Array.isArray(records) ? records : [];
+        return Array.isArray(data) ? data : [];
     } catch (error) {
-        console.error("Gagal membaca data pengajuan:", error);
+        console.error("Gagal membaca pengajuan:", error);
         return [];
     }
 }
 
-// Menyimpan data pengajuan.
 function saveRequestRecords(records) {
     try {
         localStorage.setItem(
             REQUEST_STORAGE_KEY,
             JSON.stringify(records)
         );
-
         return true;
     } catch (error) {
-        console.error("Gagal menyimpan data pengajuan:", error);
-        showRequestMessage(
-            "Data gagal disimpan. Silakan coba lagi.",
-            "error"
-        );
-
+        console.error("Gagal menyimpan pengajuan:", error);
+        showRequestMessage("Data gagal disimpan.", "error");
         return false;
     }
 }
 
-// Membuat ID unik untuk setiap pengajuan.
 function createRequestId() {
     return "REQ-" + Date.now() + "-" +
         Math.random().toString(36).slice(2, 7);
 }
 
-// Memproses formulir pengajuan karyawan.
+// Membuat pengajuan baru.
 function handleRequestSubmit(event) {
     event.preventDefault();
 
     const user = getCurrentUser();
 
-    if (!user || user.role !== "employee") {
-        showRequestMessage(
-            "Hanya karyawan yang dapat mengajukan permintaan.",
-            "error"
-        );
-        return;
-    }
+    if (!user || user.role !== "employee") return;
 
-    const type = document.getElementById("requestType")?.value;
-    const startDate = document.getElementById("requestDate")?.value;
-    const endDate = document.getElementById("requestEndDate")?.value;
-    const reason = document.getElementById("requestReason")?.value.trim();
+    const type = document.getElementById("requestType").value;
+    const startDate = document.getElementById("requestDate").value;
+    const endDate = document.getElementById("requestEndDate").value;
+    const reason = document.getElementById("requestReason").value.trim();
 
     if (!type || !startDate || !endDate || !reason) {
-        showRequestMessage(
-            "Mohon lengkapi semua kolom pengajuan.",
-            "error"
-        );
+        showRequestMessage("Lengkapi semua kolom pengajuan.", "error");
         return;
     }
 
@@ -112,33 +89,26 @@ function handleRequestSubmit(event) {
         return;
     }
 
-    const validTypes = ["Cuti", "Izin", "Lembur"];
-
-    if (!validTypes.includes(type)) {
-        showRequestMessage(
-            "Jenis pengajuan tidak valid.",
-            "error"
-        );
+    if (!["Cuti", "Izin", "Lembur"].includes(type)) {
+        showRequestMessage("Jenis pengajuan tidak valid.", "error");
         return;
     }
 
     const records = getRequestRecords();
 
-    const newRequest = {
+    records.push({
         id: createRequestId(),
         employeeId: user.employeeId,
         employeeName: user.name,
-        type: type,
-        startDate: startDate,
-        endDate: endDate,
-        reason: reason,
+        type,
+        startDate,
+        endDate,
+        reason,
         status: "pending",
         submittedAt: new Date().toISOString(),
         reviewedAt: null,
         reviewedBy: null
-    };
-
-    records.push(newRequest);
+    });
 
     if (!saveRequestRecords(records)) return;
 
@@ -152,135 +122,142 @@ function handleRequestSubmit(event) {
     renderEmployeeRequests(user.employeeId);
 }
 
-// Menampilkan pengajuan milik karyawan yang sedang login.
+// Menampilkan pengajuan milik karyawan.
 function renderEmployeeRequests(employeeId) {
-    const tableBody = document.getElementById("employeeRequests");
+    const tbody = document.getElementById("employeeRequests");
 
-    if (!tableBody) return;
+    if (!tbody) return;
 
-    tableBody.replaceChildren();
+    tbody.replaceChildren();
 
     const records = getRequestRecords()
-        .filter(function (record) {
-            return record.employeeId === employeeId;
-        })
-        .sort(function (a, b) {
-            return new Date(b.submittedAt) -
-                new Date(a.submittedAt);
-        });
-
-    if (records.length === 0) {
-        showEmptyRequestRow(
-            tableBody,
-            5,
-            "Belum ada pengajuan."
+        .filter(item => item.employeeId === employeeId)
+        .sort((a, b) =>
+            new Date(b.submittedAt) - new Date(a.submittedAt)
         );
+
+    if (!records.length) {
+        showEmptyRow(tbody, 5, "Belum ada pengajuan.");
         return;
     }
 
-    records.forEach(function (record) {
+    records.forEach(item => {
         const row = document.createElement("tr");
 
-        appendCell(row, record.type);
-        appendCell(row, formatRequestDate(record.startDate));
-        appendCell(row, formatRequestDate(record.endDate));
-        appendCell(row, record.reason);
+        appendCell(row, item.type);
+        appendCell(row, formatRequestDate(item.startDate));
+        appendCell(row, formatRequestDate(item.endDate));
+        appendCell(row, item.reason);
 
-        const statusCell = document.createElement("td");
+        const cell = document.createElement("td");
         const badge = document.createElement("span");
 
-        badge.className = "status-badge " +
-            getRequestStatusClass(record.status);
-        badge.textContent = getRequestStatusLabel(record.status);
+        badge.className =
+            "status-badge " + getStatusClass(item.status);
+        badge.textContent = getStatusLabel(item.status);
 
-        statusCell.appendChild(badge);
-        row.appendChild(statusCell);
-
-        tableBody.appendChild(row);
+        cell.appendChild(badge);
+        row.appendChild(cell);
+        tbody.appendChild(row);
     });
 }
 
 // Menampilkan seluruh pengajuan untuk HR/Admin.
 function renderApprovalRequests() {
-    const tableBody = document.getElementById("approvalRequests");
+    const tbody = document.getElementById("approvalRequests");
 
-    if (!tableBody) return;
+    if (!tbody) return;
 
-    tableBody.replaceChildren();
+    tbody.replaceChildren();
 
-    const records = getRequestRecords()
-        .sort(function (a, b) {
-            // Pengajuan menunggu ditampilkan terlebih dahulu.
-            if (a.status === "pending" && b.status !== "pending") {
-                return -1;
-            }
+    const records = getRequestRecords().sort((a, b) => {
+        if (a.status === "pending" && b.status !== "pending") return -1;
+        if (a.status !== "pending" && b.status === "pending") return 1;
 
-            if (a.status !== "pending" && b.status === "pending") {
-                return 1;
-            }
+        return new Date(b.submittedAt) - new Date(a.submittedAt);
+    });
 
-            return new Date(b.submittedAt) -
-                new Date(a.submittedAt);
-        });
-
-    if (records.length === 0) {
-        showEmptyRequestRow(
-            tableBody,
+    if (!records.length) {
+        showEmptyRow(
+            tbody,
             7,
             "Belum ada pengajuan dari karyawan."
         );
+        renderRequestStats(records);
         return;
     }
 
-    records.forEach(function (record) {
+    records.forEach(item => {
         const row = document.createElement("tr");
 
-        appendCell(row, record.employeeName);
-        appendCell(row, record.employeeId);
-        appendCell(row, record.type);
-        appendCell(row, formatRequestDate(record.startDate));
-        appendCell(row, formatRequestDate(record.endDate));
-        appendCell(row, record.reason);
+        appendCell(row, item.employeeName);
+        appendCell(row, item.employeeId);
+        appendCell(row, item.type);
+        appendCell(row, formatRequestDate(item.startDate));
+        appendCell(row, formatRequestDate(item.endDate));
+        appendCell(row, item.reason);
 
         const actionCell = document.createElement("td");
 
-        if (record.status === "pending") {
-            const approveButton = createActionButton(
-                "Setujui",
-                "approve",
-                record.id
+        if (item.status === "pending") {
+            actionCell.appendChild(
+                createActionButton("Setujui", "approve", item.id)
             );
 
-            const rejectButton = createActionButton(
-                "Tolak",
-                "reject",
-                record.id
+            actionCell.appendChild(
+                createActionButton("Tolak", "reject", item.id)
             );
-
-            actionCell.append(approveButton, rejectButton);
         } else {
             const badge = document.createElement("span");
 
-            badge.className = "status-badge " +
-                getRequestStatusClass(record.status);
-            badge.textContent = getRequestStatusLabel(record.status);
+            badge.className =
+                "status-badge " + getStatusClass(item.status);
+            badge.textContent = getStatusLabel(item.status);
 
             actionCell.appendChild(badge);
         }
 
         row.appendChild(actionCell);
-        tableBody.appendChild(row);
+        tbody.appendChild(row);
     });
+
+    renderRequestStats(records);
 }
 
-// Membuat tombol tindakan tanpa menyisipkan HTML mentah.
-function createActionButton(label, action, requestId) {
+// Memperbarui angka ringkasan di halaman HR/Admin.
+function renderRequestStats(records = getRequestRecords()) {
+    const total = records.length;
+    const pending = records.filter(
+        item => item.status === "pending"
+    ).length;
+    const approved = records.filter(
+        item => item.status === "approved"
+    ).length;
+    const rejected = records.filter(
+        item => item.status === "rejected"
+    ).length;
+
+    setText("totalRequests", total);
+    setText("pendingRequests", pending);
+    setText("approvedRequests", approved);
+    setText("rejectedRequests", rejected);
+}
+
+function setText(id, value) {
+    const element = document.getElementById(id);
+
+    if (element) {
+        element.textContent = value;
+    }
+}
+
+function createActionButton(label, action, id) {
     const button = document.createElement("button");
 
     button.type = "button";
     button.textContent = label;
     button.dataset.requestAction = action;
-    button.dataset.requestId = requestId;
+    button.dataset.requestId = id;
     button.className = action === "approve"
         ? "btn btn-primary"
         : "btn btn-danger";
@@ -288,7 +265,7 @@ function createActionButton(label, action, requestId) {
     return button;
 }
 
-// Memproses tindakan persetujuan HR/Admin.
+// Memproses keputusan HR/Admin.
 function handleApprovalAction(event) {
     const button = event.target.closest("[data-request-action]");
 
@@ -297,43 +274,28 @@ function handleApprovalAction(event) {
     const user = getCurrentUser();
 
     if (!user || user.role !== "admin") {
-        showRequestMessage(
-            "Kamu tidak memiliki akses untuk menyetujui pengajuan.",
-            "error"
-        );
+        showRequestMessage("Akses hanya untuk HR/Admin.", "error");
         return;
     }
 
     const action = button.dataset.requestAction;
-    const requestId = button.dataset.requestId;
+    const id = button.dataset.requestId;
 
     if (!["approve", "reject"].includes(action)) return;
 
     const records = getRequestRecords();
-
-    const request = records.find(function (record) {
-        return record.id === requestId;
-    });
+    const request = records.find(item => item.id === id);
 
     if (!request || request.status !== "pending") {
         renderApprovalRequests();
         return;
     }
 
-    const decision = action === "approve"
-        ? "menyetujui"
-        : "menolak";
+    const decision = action === "approve" ? "menyetujui" : "menolak";
 
-    if (!confirm(
-        `Apakah kamu yakin ingin ${decision} pengajuan ini?`
-    )) {
-        return;
-    }
+    if (!confirm(`Yakin ingin ${decision} pengajuan ini?`)) return;
 
-    request.status = action === "approve"
-        ? "approved"
-        : "rejected";
-
+    request.status = action === "approve" ? "approved" : "rejected";
     request.reviewedAt = new Date().toISOString();
     request.reviewedBy = user.name;
 
@@ -349,28 +311,25 @@ function handleApprovalAction(event) {
     );
 }
 
-// Membuat sel tabel dengan teks yang aman.
 function appendCell(row, value) {
     const cell = document.createElement("td");
     cell.textContent = value || "-";
     row.appendChild(cell);
 }
 
-// Menampilkan pesan jika tabel kosong.
-function showEmptyRequestRow(tableBody, columnCount, message) {
+function showEmptyRow(tbody, columns, message) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
 
-    cell.colSpan = columnCount;
-    cell.textContent = message;
+    cell.colSpan = columns;
     cell.className = "empty-state";
+    cell.textContent = message;
 
     row.appendChild(cell);
-    tableBody.appendChild(row);
+    tbody.appendChild(row);
 }
 
-// Mengubah kode status menjadi label yang mudah dipahami.
-function getRequestStatusLabel(status) {
+function getStatusLabel(status) {
     const labels = {
         pending: "Menunggu",
         approved: "Disetujui",
@@ -380,8 +339,7 @@ function getRequestStatusLabel(status) {
     return labels[status] || "Tidak diketahui";
 }
 
-// Menentukan kelas CSS berdasarkan status.
-function getRequestStatusClass(status) {
+function getStatusClass(status) {
     const classes = {
         pending: "status-pending",
         approved: "status-approved",
@@ -391,13 +349,12 @@ function getRequestStatusClass(status) {
     return classes[status] || "status-pending";
 }
 
-// Memformat tanggal pengajuan.
-function formatRequestDate(dateString) {
-    if (!dateString) return "-";
+function formatRequestDate(value) {
+    if (!value) return "-";
 
-    const parts = dateString.split("-");
+    const parts = value.split("-");
 
-    if (parts.length !== 3) return dateString;
+    if (parts.length !== 3) return value;
 
     const date = new Date(
         Number(parts[0]),
@@ -412,16 +369,15 @@ function formatRequestDate(dateString) {
     });
 }
 
-// Menampilkan pesan kepada pengguna.
 function showRequestMessage(message, type) {
-    const messageElement = document.getElementById("requestMessage");
+    const element = document.getElementById("requestMessage");
 
-    if (!messageElement) {
+    if (!element) {
         alert(message);
         return;
     }
 
-    messageElement.textContent = message;
-    messageElement.className = "login-message " + type;
-    messageElement.hidden = false;
+    element.textContent = message;
+    element.className = "login-message " + type;
+    element.hidden = false;
 }
