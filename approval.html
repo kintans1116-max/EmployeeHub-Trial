@@ -1,1 +1,307 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Persetujuan Pengajuan | EmployeeHub</title>
+
+    <meta
+        name="description"
+        content="Halaman HR untuk mengelola pengajuan karyawan EmployeeHub."
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/auth.js" defer></script>
+    <script src="js/app.js" defer></script>
+    <script src="js/requests.js" defer></script>
+</head>
+
+<body
+    class="app-page"
+    data-protected="true"
+    data-allowed-roles="admin"
+>
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-brand">
+                <div class="brand-icon">E</div>
+
+                <div>
+                    <h2>EmployeeHub</h2>
+                    <span>HR Management Portal</span>
+                </div>
+            </div>
+
+            <div class="sidebar-profile">
+                <div class="profile-avatar" data-user-initial>H</div>
+
+                <div class="profile-details">
+                    <strong data-user-name>HR Admin</strong>
+                    <span data-user-id>HR001</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <p class="nav-heading">MENU UTAMA</p>
+
+                <a
+                    href="approval.html"
+                    class="sidebar-link active"
+                    data-nav-link
+                >
+                    <span class="nav-icon">▦</span>
+                    <span>Persetujuan</span>
+                </a>
+
+                <a href="#requests" class="sidebar-link">
+                    <span class="nav-icon">▤</span>
+                    <span>Pengajuan Karyawan</span>
+                </a>
+
+                <a href="#information" class="sidebar-link">
+                    <span class="nav-icon">ⓘ</span>
+                    <span>Informasi</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <button
+                    type="button"
+                    class="sidebar-link logout-button"
+                    data-logout
+                >
+                    <span class="nav-icon">↪</span>
+                    <span>Keluar</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- OVERLAY MOBILE -->
+        <div
+            class="sidebar-overlay"
+            id="sidebarOverlay"
+        ></div>
+
+        <!-- KONTEN UTAMA -->
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div class="topbar-left">
+
+                    <button
+                        type="button"
+                        class="sidebar-toggle"
+                        id="sidebarToggle"
+                        aria-label="Buka menu navigasi"
+                    >
+                        ☰
+                    </button>
+
+                    <div>
+                        <p class="topbar-label">
+                            HR Management Portal
+                        </p>
+
+                        <h1 class="page-title">
+                            Persetujuan Pengajuan
+                        </h1>
+                    </div>
+
+                </div>
+
+                <div class="topbar-right">
+                    <div class="date-display">
+                        <span>📅</span>
+                        <span data-current-date></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- SAMBUTAN -->
+            <section class="welcome-section">
+                <div>
+                    <p class="welcome-eyebrow">
+                        HUMAN RESOURCES
+                    </p>
+
+                    <h2>
+                        Selamat datang,
+                        <span data-user-name>HR Admin</span>!
+                    </h2>
+
+                    <p>
+                        Tinjau pengajuan karyawan dan perbarui
+                        status persetujuannya melalui halaman ini.
+                    </p>
+                </div>
+
+                <div
+                    class="welcome-decoration"
+                    aria-hidden="true"
+                >
+                    <div class="welcome-decoration-circle">HR</div>
+                </div>
+            </section>
+
+            <!-- RINGKASAN PENGAJUAN -->
+            <section class="stats-grid">
+
+                <article class="stat-card">
+                    <div class="stat-icon stat-icon-blue">▤</div>
+
+                    <div class="stat-content">
+                        <p>Total Pengajuan</p>
+                        <h3 id="totalRequests">0</h3>
+                        <span>Seluruh pengajuan tercatat</span>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon stat-icon-purple">◷</div>
+
+                    <div class="stat-content">
+                        <p>Menunggu</p>
+                        <h3 id="pendingRequests">0</h3>
+                        <span>Memerlukan peninjauan</span>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon stat-icon-green">✓</div>
+
+                    <div class="stat-content">
+                        <p>Disetujui</p>
+                        <h3 id="approvedRequests">0</h3>
+                        <span>Pengajuan telah disetujui</span>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon stat-icon-red">×</div>
+
+                    <div class="stat-content">
+                        <p>Ditolak</p>
+                        <h3 id="rejectedRequests">0</h3>
+                        <span>Pengajuan tidak disetujui</span>
+                    </div>
+                </article>
+
+            </section>
+
+            <!-- DAFTAR PENGAJUAN -->
+            <section class="content-section" id="requests">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Daftar Pengajuan Karyawan</h2>
+
+                        <p>
+                            Tinjau informasi dan tentukan status
+                            setiap pengajuan.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- PESAN -->
+                <div
+                    id="requestMessage"
+                    class="login-message"
+                    role="status"
+                    aria-live="polite"
+                    hidden
+                ></div>
+
+                <!-- TABEL -->
+                <div class="card table-card">
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Nama Karyawan</th>
+                                    <th>ID Karyawan</th>
+                                    <th>Jenis</th>
+                                    <th>Tanggal Mulai</th>
+                                    <th>Tanggal Selesai</th>
+                                    <th>Alasan</th>
+                                    <th>Tindakan / Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="approvalRequests">
+                                <tr>
+                                    <td colspan="7">
+                                        Memuat data pengajuan...
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- INFORMASI -->
+            <section
+                class="content-section"
+                id="information"
+            >
+                <div class="section-heading">
+                    <div>
+                        <h2>Informasi Persetujuan</h2>
+
+                        <p>
+                            Panduan singkat pengelolaan pengajuan.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card company-info-card">
+
+                    <div class="company-info-icon">ⓘ</div>
+
+                    <div>
+                        <h3>Alur Persetujuan</h3>
+
+                        <p>
+                            Pengajuan yang dikirim karyawan akan
+                            memiliki status Menunggu hingga HR/Admin
+                            melakukan peninjauan.
+                        </p>
+
+                        <p>
+                            Setelah ditinjau, status akan berubah
+                            menjadi Disetujui atau Ditolak.
+                        </p>
+
+                        <p class="company-info-note">
+                            Periksa jenis pengajuan, tanggal, dan
+                            alasan sebelum mengambil keputusan.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="app-footer">
+                <p>
+                    © 2026 EmployeeHub. HR Management Portal.
+                </p>
+            </footer>
+
+        </main>
+    </div>
+</body>
+</html>
