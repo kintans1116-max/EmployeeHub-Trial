@@ -1,1 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Dashboard Karyawan | EmployeeHub</title>
+
+    <meta
+        name="description"
+        content="Dashboard karyawan EmployeeHub untuk absensi, pengajuan cuti, izin, dan lembur."
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/auth.js" defer></script>
+    <script src="js/app.js" defer></script>
+    <script src="js/attendance.js" defer></script>
+    <script src="js/requests.js" defer></script>
+</head>
+
+<body
+    class="app-page"
+    data-protected="true"
+    data-allowed-roles="employee"
+>
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-brand">
+                <div class="brand-icon">E</div>
+                <div>
+                    <h2>EmployeeHub</h2>
+                    <span>Employee Portal</span>
+                </div>
+            </div>
+
+            <div class="sidebar-profile">
+                <div class="profile-avatar" data-user-initial>U</div>
+                <div class="profile-details">
+                    <strong data-user-name>Karyawan</strong>
+                    <span data-user-id>EMP001</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <p class="nav-heading">MENU UTAMA</p>
+
+                <a
+                    href="dashboard.html"
+                    class="sidebar-link active"
+                    data-nav-link
+                >
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#attendance" class="sidebar-link">
+                    <span class="nav-icon">◷</span>
+                    <span>Absensi</span>
+                </a>
+
+                <a href="#requests" class="sidebar-link">
+                    <span class="nav-icon">▤</span>
+                    <span>Pengajuan Saya</span>
+                </a>
+
+                <a href="#company" class="sidebar-link">
+                    <span class="nav-icon">ⓘ</span>
+                    <span>Informasi Perusahaan</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <button
+                    type="button"
+                    class="sidebar-link logout-button"
+                    data-logout
+                >
+                    <span class="nav-icon">↪</span>
+                    <span>Keluar</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- OVERLAY SIDEBAR MOBILE -->
+        <div
+            class="sidebar-overlay"
+            id="sidebarOverlay"
+        ></div>
+
+        <!-- KONTEN UTAMA -->
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button
+                        type="button"
+                        class="sidebar-toggle"
+                        id="sidebarToggle"
+                        aria-label="Buka menu navigasi"
+                    >
+                        ☰
+                    </button>
+
+                    <div>
+                        <p class="topbar-label">Employee Portal</p>
+                        <h1 class="page-title">Dashboard</h1>
+                    </div>
+                </div>
+
+                <div class="topbar-right">
+                    <div class="date-display">
+                        <span>📅</span>
+                        <span data-current-date></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- SAMBUTAN -->
+            <section class="welcome-section">
+                <div>
+                    <p class="welcome-eyebrow">
+                        EMPLOYEE SELF-SERVICE
+                    </p>
+
+                    <h2>
+                        Selamat datang,
+                        <span data-user-name>Karyawan</span>!
+                    </h2>
+
+                    <p>
+                        Kelola absensi dan kebutuhan pekerjaanmu
+                        dengan mudah melalui EmployeeHub.
+                    </p>
+                </div>
+
+                <div class="welcome-decoration" aria-hidden="true">
+                    <div class="welcome-decoration-circle">E</div>
+                </div>
+            </section>
+
+            <!-- RINGKASAN -->
+            <section class="stats-grid">
+
+                <article class="stat-card">
+                    <div class="stat-icon stat-icon-blue">◷</div>
+
+                    <div class="stat-content">
+                        <p>Status Absensi Hari Ini</p>
+                        <h3 id="attendanceStatus">Belum Absen</h3>
+                        <span data-attendance-date></span>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon stat-icon-green">↗</div>
+
+                    <div class="stat-content">
+                        <p>Jam Masuk</p>
+                        <h3 id="checkInTime">--:--</h3>
+                        <span>Waktu absen masuk</span>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon stat-icon-purple">↙</div>
+
+                    <div class="stat-content">
+                        <p>Jam Pulang</p>
+                        <h3 id="checkOutTime">--:--</h3>
+                        <span>Waktu absen pulang</span>
+                    </div>
+                </article>
+
+            </section>
+
+            <!-- ABSENSI -->
+            <section class="content-section" id="attendance">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Absensi Hari Ini</h2>
+                        <p>
+                            Catat waktu kedatangan dan kepulanganmu.
+                        </p>
+                    </div>
+
+                    <span class="section-icon">◷</span>
+                </div>
+
+                <div class="card attendance-card">
+
+                    <div class="attendance-info">
+                        <div class="attendance-illustration">
+                            <span>🕒</span>
+                        </div>
+
+                        <div>
+                            <h3>Selamat bekerja!</h3>
+                            <p>
+                                Pastikan kamu melakukan absensi
+                                masuk dan pulang setiap hari kerja.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="attendance-actions">
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="clockInButton"
+                        >
+                            Absen Masuk
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            id="clockOutButton"
+                            disabled
+                        >
+                            Absen Pulang
+                        </button>
+                    </div>
+
+                    <div
+                        id="attendanceMessage"
+                        class="login-message"
+                        role="status"
+                        aria-live="polite"
+                        hidden
+                    ></div>
+
+                </div>
+            </section>
+
+            <!-- RIWAYAT ABSENSI -->
+            <section class="content-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Riwayat Absensi</h2>
+                        <p>
+                            Lihat catatan absensimu sebelumnya.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card table-card">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Jam Masuk</th>
+                                    <th>Jam Pulang</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="attendanceHistory">
+                                <tr>
+                                    <td colspan="4">
+                                        Memuat riwayat absensi...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- FORM PENGAJUAN -->
+            <section class="content-section" id="requests">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Ajukan Permintaan</h2>
+                        <p>
+                            Kirim pengajuan cuti, izin, atau lembur.
+                        </p>
+                    </div>
+
+                    <span class="section-icon">▤</span>
+                </div>
+
+                <div class="card form-card">
+
+                    <form id="requestForm">
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="requestType">
+                                    Jenis Pengajuan
+                                </label>
+
+                                <select
+                                    id="requestType"
+                                    name="requestType"
+                                    class="form-control"
+                                    required
+                                >
+                                    <option value="">
+                                        Pilih jenis pengajuan
+                                    </option>
+
+                                    <option value="Cuti">Cuti</option>
+                                    <option value="Izin">Izin</option>
+                                    <option value="Lembur">Lembur</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="requestDate">
+                                    Tanggal Mulai
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="requestDate"
+                                    name="requestDate"
+                                    class="form-control"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="requestEndDate">
+                                    Tanggal Selesai
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="requestEndDate"
+                                    name="requestEndDate"
+                                    class="form-control"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="requestReason">
+                                Alasan Pengajuan
+                            </label>
+
+                            <textarea
+                                id="requestReason"
+                                name="requestReason"
+                                class="form-control"
+                                rows="4"
+                                placeholder="Tuliskan alasan pengajuan secara jelas..."
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                            >
+                                Kirim Pengajuan
+                            </button>
+                        </div>
+
+                        <div
+                            id="requestMessage"
+                            class="login-message"
+                            role="status"
+                            aria-live="polite"
+                            hidden
+                        ></div>
+
+                    </form>
+
+                </div>
+            </section>
+
+            <!-- DAFTAR PENGAJUAN -->
+            <section class="content-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Pengajuan Saya</h2>
+                        <p>
+                            Pantau status permintaan yang telah dikirim.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card table-card">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Jenis</th>
+                                    <th>Tanggal Mulai</th>
+                                    <th>Tanggal Selesai</th>
+                                    <th>Alasan</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="employeeRequests">
+                                <tr>
+                                    <td colspan="5">
+                                        Memuat data pengajuan...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- INFORMASI PERUSAHAAN -->
+            <section class="content-section" id="company">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Informasi Perusahaan</h2>
+                        <p>
+                            Informasi umum untuk seluruh karyawan.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card company-info-card">
+                    <div class="company-info-icon">🏢</div>
+
+                    <div>
+                        <h3>EmployeeHub</h3>
+                        <p>
+                            Portal layanan mandiri karyawan untuk
+                            membantu pengelolaan absensi dan
+                            pengajuan administrasi secara terpusat.
+                        </p>
+
+                        <p class="company-info-note">
+                            Untuk pertanyaan terkait pekerjaan atau
+                            administrasi, silakan hubungi bagian HR.
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="app-footer">
+                <p>
+                    © 2026 EmployeeHub. Employee Self-Service Portal.
+                </p>
+            </footer>
+
+        </main>
+    </div>
+</body>
+</html>
