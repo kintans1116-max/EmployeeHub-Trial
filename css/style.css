@@ -1493,3 +1493,120 @@ select.form-control {
         animation-iteration-count: 1 !important;
     }
 }
+
+/* ===== FIX LOGIN PAGE LAYOUT ===== */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 1100px;
+    min-height: 600px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    border-radius: 24px;
+    background: #ffffff;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+}
+
+.brand-panel {
+    position: relative;
+    min-width: 0;
+    padding: 48px;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #2447c5, #4169f5);
+    color: #ffffff;
+    z-index: 1;
+}
+
+.login-panel {
+    position: relative;
+    min-width: 0;
+    width: 100%;
+    padding: 48px;
+    box-sizing: border-box;
+    background: #ffffff;
+    color: #172033;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-panel form {
+    width: 100%;
+}
+
+.login-panel input:not([type="checkbox"]),
+.login-panel input:not([type="checkbox"]):focus {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.login-panel input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    accent-color: #3157dc;
+    cursor: pointer;
+}
+
+.login-panel button {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.login-panel .remember-row,
+.login-panel .remember-me,
+.login-panel .form-options {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.login-panel .remember-row label,
+.login-panel .remember-me label,
+.login-panel .form-options label {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .login-page {
+        padding: 16px;
+        align-items: flex-start;
+    }
+
+    .login-container {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        min-height: auto;
+    }
+
+    .brand-panel {
+        padding: 28px;
+    }
+
+    .login-panel {
+        padding: 28px;
+    }
+}
+
+@media (max-width: 420px) {
+    .brand-panel,
+    .login-panel {
+        padding: 22px;
+    }
+}
+
