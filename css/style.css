@@ -2182,3 +2182,72 @@ select.form-control {
         flex-direction: column;
     }
 }
+
+/* ===== FIX LOGIN: BRANDING KIRI, FORM KANAN ===== */
+
+@media screen and (min-width: 701px) {
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    body main.login-layout {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        grid-template-rows: minmax(100vh, auto) !important;
+        width: 100% !important;
+        max-width: none !important;
+        min-height: 100vh;
+        min-height: 100dvh;
+        height: auto;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box;
+        align-items: stretch;
+        gap: 0 !important;
+    }
+
+    body main.login-layout > section.login-brand {
+        display: flex !important;
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        width: 100% !important;
+        min-width: 0;
+        max-width: none !important;
+        min-height: 100vh;
+        min-height: 100dvh;
+        box-sizing: border-box;
+    }
+
+    body main.login-layout > section.login-panel {
+        display: flex !important;
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        width: 100% !important;
+        min-width: 0;
+        max-width: none !important;
+        min-height: 100vh;
+        min-height: 100dvh;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+        overflow-y: auto;
+    }
+
+    .login-form-wrap {
+        width: 100%;
+        max-width: 420px;
+        margin: auto;
+        box-sizing: border-box;
+    }
+
+    .mobile-brand {
+        display: none !important;
+    }
+}
