@@ -2252,419 +2252,421 @@ select.form-control {
     }
 }
 
-/* =====================================
-   EMPLOYEEHUB - LOGIN FORM POLISH
-   ===================================== */
+/* =========================================
+   EMPLOYEEHUB - LEFT BRANDING PANEL
+   ========================================= */
 
-/* Panel kanan */
-body main.login-layout > .login-panel {
-    background: #f7f9fe;
-    padding: 40px 32px;
-}
-
-body main.login-layout .login-form-wrap {
-    width: 100%;
-    max-width: 430px;
-    padding: 36px;
-    background: #ffffff;
-    border: 1px solid #e8edf7;
-    border-radius: 24px;
-    box-shadow: 0 18px 50px rgba(29, 55, 105, 0.08);
-    box-sizing: border-box;
-}
-
-/* Ikon sambutan */
-body main.login-layout .welcome-icon {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 22px;
-    border-radius: 16px;
-    background: #edf2ff;
-    color: #3159d9;
-    font-size: 24px;
-}
-
-/* Teks judul */
-body main.login-layout .eyebrow.blue {
-    margin: 0 0 10px;
-    color: #4263d8;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2px;
-}
-
-body main.login-layout .login-form-wrap h2 {
-    margin: 0 0 10px;
-    color: #17233d;
-    font-size: clamp(25px, 2vw, 30px);
-    line-height: 1.25;
-    letter-spacing: -0.8px;
-}
-
-body main.login-layout .login-form-wrap .intro {
-    margin: 0 0 28px;
-    color: #778198;
-    font-size: 13px;
-    line-height: 1.7;
-}
-
-/* Form dan label */
-body main.login-layout #loginForm {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-}
-
-body main.login-layout #loginForm > label {
-    margin: 5px 0 0;
-    color: #34415b;
-    font-size: 13px;
-    font-weight: 700;
-}
-
-body main.login-layout #loginForm input[type="text"],
-body main.login-layout #loginForm input[type="password"] {
-    display: block;
-    width: 100%;
-    height: 48px;
-    padding: 0 15px;
-    border: 1px solid #dce3f0;
-    border-radius: 12px;
-    outline: none;
-    background: #f9faff;
-    color: #1b2942;
-    font: inherit;
-    font-size: 14px;
-    box-sizing: border-box;
-    transition: border-color 0.2s, box-shadow 0.2s,
-                background 0.2s;
-}
-
-body main.login-layout #loginForm input::placeholder {
-    color: #a3adbf;
-}
-
-body main.login-layout #loginForm input[type="text"]:focus,
-body main.login-layout #loginForm input[type="password"]:focus {
-    border-color: #5275ed;
-    background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(82, 117, 237, 0.12);
-}
-
-/* Password: tombol harus berada DI DALAM input */
-body main.login-layout #loginForm .password-wrap {
-    position: relative !important;
-    display: flex !important;
-    align-items: center;
-    width: 100%;
-    min-width: 0;
-    margin: 0;
-}
-
-body main.login-layout #loginForm .password-wrap input {
-    width: 100%;
-    min-width: 0;
-    padding-right: 88px;
-}
-
-body main.login-layout #loginForm .password-wrap .password-toggle {
-    position: absolute !important;
-    top: 50% !important;
-    right: 9px !important;
-    left: auto !important;
-    transform: translateY(-50%) !important;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 32px;
-    padding: 0 9px;
-    border: none;
-    border-radius: 8px;
-    background: transparent;
-    color: #4564cf;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-body main.login-layout #loginForm .password-toggle:hover {
-    background: #edf2ff;
-    color: #2548bb;
-}
-
-/* Ingat saya dan lupa password */
-body main.login-layout #loginForm .form-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 8px 0 12px;
-}
-
-body main.login-layout #loginForm .check-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    color: #65718a;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-body main.login-layout #loginForm .check-label input {
-    width: 15px;
-    height: 15px;
-    margin: 0;
-    accent-color: #4263df;
-}
-
-body main.login-layout #loginForm .text-button {
-    color: #4263df;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-body main.login-layout #loginForm .text-button:hover {
-    color: #203fb3;
-}
-
-/* Tombol masuk */
-body main.login-layout #loginForm .btn-primary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    min-height: 49px;
-    margin-top: 2px;
-    padding: 13px 18px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #3157d5, #4976f0);
-    box-shadow: 0 7px 16px rgba(49, 87, 213, 0.20);
-    color: #ffffff;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-body main.login-layout #loginForm .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 10px 22px rgba(49, 87, 213, 0.27);
-}
-
-body main.login-layout #loginForm .btn-primary:active {
-    transform: translateY(0);
-}
-
-/* Pesan error login */
-body main.login-layout #loginForm .form-error:not([hidden]) {
-    margin: 0;
-    padding: 11px 12px;
-    border: 1px solid #f3cccc;
-    border-radius: 10px;
-    background: #fff4f4;
-    color: #b42332;
-    font-size: 12px;
-    line-height: 1.5;
-}
-
-/* Akun demo */
-body main.login-layout .demo-box {
-    margin-top: 22px;
-    padding: 15px 16px;
-    border: 1px solid #e4eaff;
-    border-radius: 13px;
-    background: #f5f7ff;
-    color: #596780;
-    font-size: 12px;
-    line-height: 1.8;
-}
-
-body main.login-layout .demo-box strong {
-    display: block;
-    margin-bottom: 5px;
-    color: #344b91;
-    font-size: 12px;
-}
-
-body main.login-layout .demo-box p {
-    margin: 3px 0;
-}
-
-body main.login-layout .demo-box b {
-    color: #34415b;
-}
-
-body main.login-layout .login-legal {
-    margin: 20px 0 0;
-    color: #a0a9ba;
-    font-size: 11px;
-    text-align: center;
-}
-
-/* Tablet dan HP */
-@media (max-width: 700px) {
-    body main.login-layout > .login-panel {
-        padding: 24px 16px;
-    }
-
-    body main.login-layout .login-form-wrap {
-        padding: 25px 21px;
-        border-radius: 20px;
-    }
-
-    body main.login-layout .welcome-icon {
-        width: 44px;
-        height: 44px;
-        margin-bottom: 18px;
-    }
-}
-
-/* Laptop dengan tinggi layar terbatas */
-@media (min-width: 701px) and (max-height: 760px) {
-    body main.login-layout > .login-panel {
-        padding: 20px;
-    }
-
-    body main.login-layout .login-form-wrap {
-        padding: 25px 30px;
-    }
-
-    body main.login-layout .welcome-icon {
-        margin-bottom: 14px;
-    }
-
-    body main.login-layout .login-form-wrap .intro {
-        margin-bottom: 18px;
-    }
-
-    body main.login-layout .demo-box {
-        margin-top: 16px;
-    }
-
-    body main.login-layout .login-legal {
-        margin-top: 12px;
-    }
-}
-
-/* ===== EMPLOYEEHUB: RIGHT PANEL DECORATION ===== */
-
-body main.login-layout > .login-panel {
+body main.login-layout > section.login-brand {
     position: relative;
     isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 12px;
+
+    min-width: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: clamp(28px, 4vw, 46px);
+
+    box-sizing: border-box;
     overflow: hidden;
+
+    color: #ffffff;
+
     background:
         radial-gradient(
-            circle at 95% 10%,
-            rgba(105, 137, 255, 0.13),
+            circle at 95% 5%,
+            rgba(112, 153, 255, 0.25),
             transparent 30%
         ),
-        radial-gradient(
-            circle at 5% 95%,
-            rgba(151, 126, 255, 0.10),
-            transparent 32%
-        ),
-        linear-gradient(145deg, #f8faff, #f0f4ff);
+        linear-gradient(
+            145deg,
+            #2146bd 0%,
+            #3159d9 55%,
+            #416bea 100%
+        );
 }
 
-/* Lingkaran dekoratif di belakang form */
-body main.login-layout > .login-panel::before {
+/* Ornamen lingkaran di sudut kanan atas */
+body main.login-layout > section.login-brand::before {
     content: "";
     position: absolute;
-    width: 290px;
-    height: 290px;
-    top: -125px;
-    right: -100px;
-    border: 1px solid rgba(79, 108, 218, 0.13);
+    z-index: -1;
+    top: -100px;
+    right: -90px;
+
+    width: 210px;
+    height: 210px;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 50%;
+
     box-shadow:
-        0 0 0 24px rgba(79, 108, 218, 0.035),
-        0 0 0 48px rgba(79, 108, 218, 0.025);
+        0 0 0 20px rgba(255, 255, 255, 0.035),
+        0 0 0 42px rgba(255, 255, 255, 0.025);
+
     pointer-events: none;
-    z-index: -1;
 }
 
-/* Aksen dekoratif bagian bawah */
-body main.login-layout > .login-panel::after {
+/* Ornamen lingkaran di bagian bawah */
+body main.login-layout > section.login-brand::after {
     content: "";
     position: absolute;
-    width: 180px;
-    height: 180px;
-    bottom: -105px;
-    left: -75px;
-    border-radius: 50%;
-    background: linear-gradient(
-        135deg,
-        rgba(94, 124, 238, 0.10),
-        rgba(162, 147, 255, 0.04)
-    );
-    pointer-events: none;
     z-index: -1;
+    right: -105px;
+    bottom: -155px;
+
+    width: 300px;
+    height: 300px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 24px rgba(255, 255, 255, 0.035),
+        0 0 0 48px rgba(255, 255, 255, 0.025);
+
+    pointer-events: none;
 }
 
-/* Pastikan kartu login tetap berada di atas dekorasi */
-body main.login-layout .login-form-wrap {
+/* Bagian judul dan deskripsi */
+body main.login-layout .brand-left-top {
     position: relative;
     z-index: 1;
 }
 
-/* Kartu sedikit lebih menonjol */
-body main.login-layout .login-form-wrap {
-    border-color: rgba(221, 229, 247, 0.9);
-    box-shadow:
-        0 20px 55px rgba(38, 59, 111, 0.08),
-        0 3px 10px rgba(38, 59, 111, 0.025);
+body main.login-layout .brand-logo {
+    margin: 0;
+    color: #ffffff;
+
+    font-size: clamp(25px, 2.5vw, 30px);
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    line-height: 1.2;
 }
-/* TEST VISUAL PANEL LOGIN KANAN */
-body main.login-layout > section.login-panel {
-    position: relative !important;
-    isolation: isolate !important;
-    background: linear-gradient(
-        135deg,
-        #eef2ff 0%,
-        #f8faff 50%,
-        #e5edff 100%
-    ) !important;
+
+body main.login-layout .brand-tagline {
+    margin: 12px 0 0;
+
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+body main.login-layout .brand-divider {
+    width: 100%;
+    max-width: 440px;
+    height: 1px;
+    margin: 16px 0 12px;
+
+    background: rgba(255, 255, 255, 0.27);
+}
+
+body main.login-layout .brand-copy {
+    max-width: 440px;
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Area ilustrasi */
+body main.login-layout .brand-illustration {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    max-width: 390px;
+    height: clamp(145px, 24vh, 195px);
+
+    margin: 0 auto;
+    flex-shrink: 0;
+}
+
+/* Laptop */
+body main.login-layout .ill-laptop {
+    position: absolute;
+    left: 50%;
+    bottom: 17px;
+
+    width: 166px;
+    transform: translateX(-50%);
+}
+
+body main.login-layout .ill-screen {
+    position: relative;
+    height: 99px;
+    padding: 8px;
+
+    box-sizing: border-box;
     overflow: hidden;
+
+    border: 5px solid #b8d0ff;
+    border-radius: 9px 9px 4px 4px;
+
+    background: linear-gradient(
+        145deg,
+        #dce8ff,
+        #a8c4ff
+    );
+
+    box-shadow: 0 8px 18px rgba(12, 37, 111, 0.18);
 }
 
-body main.login-layout > section.login-panel::before {
+body main.login-layout .ill-screen-top {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 9px;
+}
+
+body main.login-layout .ill-screen-top span {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #7195e9;
+}
+
+body main.login-layout .ill-avatar {
+    position: relative;
+    width: 31px;
+    height: 31px;
+    margin: 0 auto 5px;
+
+    border-radius: 50%;
+    background: #85a8f5;
+}
+
+body main.login-layout .ill-avatar span {
+    position: absolute;
+    top: 6px;
+    left: 11px;
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+    background: #eaf1ff;
+}
+
+body main.login-layout .ill-avatar::after {
     content: "";
     position: absolute;
-    width: 320px;
-    height: 320px;
-    top: -120px;
-    right: -100px;
+    left: 7px;
+    bottom: 5px;
+
+    width: 17px;
+    height: 9px;
+
+    border-radius: 10px 10px 5px 5px;
+    background: #eaf1ff;
+}
+
+body main.login-layout .ill-screen-line {
+    width: 57px;
+    height: 4px;
+    margin: 0 auto 4px;
+
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+body main.login-layout .ill-screen-line.small {
+    width: 34px;
+    opacity: 0.65;
+}
+
+body main.login-layout .ill-laptop-base {
+    position: relative;
+    z-index: 2;
+
+    width: 190px;
+    height: 8px;
+    margin-left: -12px;
+
+    border-radius: 2px 2px 9px 9px;
+    background: linear-gradient(
+        180deg,
+        #d9e5ff,
+        #8baaf0
+    );
+}
+
+body main.login-layout .ill-laptop-base::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    width: 35px;
+    height: 3px;
+
+    transform: translateX(-50%);
+    border-radius: 0 0 5px 5px;
+    background: #88a8ef;
+}
+
+body main.login-layout .ill-laptop-shadow {
+    position: absolute;
+    z-index: -1;
+    left: -22px;
+    bottom: -11px;
+
+    width: 210px;
+    height: 16px;
+
     border-radius: 50%;
-    background: rgba(93, 124, 239, 0.15);
-    box-shadow: 0 0 0 35px rgba(93, 124, 239, 0.06);
-    z-index: 0;
+    background: rgba(15, 40, 117, 0.20);
+}
+
+/* Kartu ikon yang melayang */
+body main.login-layout .ill-card {
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    width: 38px;
+    height: 40px;
+    box-sizing: border-box;
+
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    border-radius: 8px;
+
+    background: rgba(180, 207, 255, 0.24);
+    box-shadow: 0 5px 14px rgba(15, 39, 113, 0.10);
+}
+
+body main.login-layout .ill-symbol {
+    color: #eaf1ff;
+    font-size: 19px;
+    line-height: 1;
+}
+
+body main.login-layout .ill-card-line {
+    width: 18px;
+    height: 2px;
+
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+body main.login-layout .ill-card-line.short {
+    width: 11px;
+    opacity: 0.65;
+}
+
+body main.login-layout .ill-calendar {
+    top: 5px;
+    left: 17%;
+}
+
+body main.login-layout .ill-people {
+    top: 56px;
+    left: 2%;
+}
+
+body main.login-layout .ill-document {
+    top: 0;
+    right: 19%;
+}
+
+body main.login-layout .ill-settings {
+    top: 47px;
+    right: 5%;
+}
+
+/* Garis penghubung dekoratif */
+body main.login-layout .ill-connector {
+    position: absolute;
+    z-index: -1;
+
+    border: 1px dashed rgba(255, 255, 255, 0.24);
+    border-left: 0;
+    border-bottom: 0;
+
     pointer-events: none;
 }
 
-body main.login-layout > section.login-panel::after {
-    content: "";
-    position: absolute;
-    width: 220px;
-    height: 220px;
-    bottom: -120px;
-    left: -80px;
-    border-radius: 50%;
-    background: rgba(147, 130, 255, 0.12);
-    z-index: 0;
-    pointer-events: none;
+body main.login-layout .connector-one {
+    top: 30px;
+    left: 26%;
+    width: 17%;
+    height: 35px;
+    border-radius: 0 12px 0 0;
 }
 
-body main.login-layout > section.login-panel > .login-form-wrap {
-    position: relative !important;
-    z-index: 1 !important;
+body main.login-layout .connector-two {
+    top: 54px;
+    right: 23%;
+    width: 15%;
+    height: 24px;
+    border-radius: 0 10px 0 0;
+}
+
+body main.login-layout .connector-three {
+    top: 77px;
+    left: 13%;
+    width: 16%;
+    height: 25px;
+    border-radius: 0 10px 0 0;
+}
+
+/* Footer panel kiri */
+body main.login-layout .brand-footer {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    width: 100%;
+    padding-top: 12px;
+    box-sizing: border-box;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+body main.login-layout .pulse-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    background: #a7f3d0;
+}
+
+/* Layar laptop kecil */
+@media (min-width: 701px) and (max-height: 700px) {
+    body main.login-layout > section.login-brand {
+        padding-top: 24px;
+        padding-bottom: 24px;
+        gap: 8px;
+    }
+
+    body main.login-layout .brand-divider {
+        margin: 10px 0;
+    }
+
+    body main.login-layout .brand-illustration {
+        height: 145px;
+    }
+
+    body main.login-layout .ill-laptop {
+        transform: translateX(-50%) scale(0.86);
+        transform-origin: bottom center;
+    }
 }
