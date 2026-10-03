@@ -3196,3 +3196,88 @@ body main.login-layout .login-form-wrap .mobile-brand {
     }
 }
 
+/* FIX LOGIN PANEL */
+body main.login-layout > section.login-panel {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 40px 28px !important;
+    background: #ffffff !important;
+}
+
+body main.login-layout > section.login-panel .login-form-wrap {
+    width: 100% !important;
+    max-width: 420px !important;
+    min-width: 0 !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+body main.login-layout > section.login-panel .password-wrap {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+body main.login-layout > section.login-panel .password-wrap input {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 44px !important;
+    box-sizing: border-box !important;
+    padding: 10px 100px 10px 12px !important;
+}
+
+body main.login-layout > section.login-panel .password-wrap .password-toggle {
+    position: absolute !important;
+    top: 50% !important;
+    right: 8px !important;
+    transform: translateY(-50%) !important;
+    z-index: 2 !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 5px 4px !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #315fe8 !important;
+    font: inherit !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+}
+
+body main.login-layout > section.login-panel .form-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+
+body main.login-layout > section.login-panel .btn-full {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 700px) {
+    body main.login-layout {
+        grid-template-columns: 1fr !important;
+    }
+
+    body main.login-layout > section.login-brand {
+        display: none !important;
+    }
+
+    body main.login-layout > section.login-panel {
+        width: 100% !important;
+        min-height: 100vh !important;
+        padding: 28px 20px !important;
+    }
+}
+
