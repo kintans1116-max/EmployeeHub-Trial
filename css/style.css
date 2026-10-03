@@ -2183,4 +2183,429 @@ select.form-control {
     }
 }
 
+/* ===== LOGIN PAGE LAYOUT FIX ===== */
 
+body {
+    margin: 0;
+}
+
+main.login-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    width: 100%;
+    height: 100vh;
+    min-height: 560px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+/* Panel kiri */
+main.login-layout .login-brand {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 0;
+    min-height: 0;
+    padding: clamp(28px, 5vw, 72px);
+    overflow: hidden;
+    color: #ffffff;
+    background: linear-gradient(145deg, #183e9b, #2864e8 72%, #3978ed);
+}
+
+main.login-layout .login-brand::before,
+main.login-layout .login-brand::after {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    right: -270px;
+    top: -100px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+main.login-layout .login-brand::after {
+    width: 310px;
+    height: 310px;
+    right: -215px;
+    top: -45px;
+}
+
+main.login-layout .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+main.login-layout .login-brand .eyebrow {
+    margin-bottom: 14px;
+    color: #cbdcff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+}
+
+main.login-layout .login-brand h1 {
+    margin: 0 0 12px;
+    font-size: clamp(32px, 3.5vw, 48px);
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    overflow-wrap: anywhere;
+}
+
+main.login-layout .brand-tagline {
+    margin: 0 0 18px;
+    font-size: 16px;
+    font-weight: 650;
+    line-height: 1.5;
+}
+
+main.login-layout .brand-copy {
+    max-width: 390px;
+    margin: 0;
+    color: #e0eaff;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+main.login-layout .brand-footer {
+    position: absolute;
+    bottom: 26px;
+    left: clamp(28px, 5vw, 72px);
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #e0eaff;
+    font-size: 10px;
+}
+
+main.login-layout .pulse-dot {
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #7ff0bc;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+/* Panel kanan */
+main.login-layout .login-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 0;
+    padding: 24px clamp(22px, 4vw, 60px);
+    overflow-y: auto;
+    background: #ffffff;
+}
+
+main.login-layout .login-form-wrap {
+    width: 100%;
+    max-width: 390px;
+    margin: auto;
+}
+
+main.login-layout .mobile-brand {
+    display: none;
+}
+
+main.login-layout .welcome-icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    background: #edf3ff;
+    color: #2864e8;
+    font-size: 18px;
+}
+
+main.login-layout .login-form-wrap > .eyebrow {
+    margin-bottom: 10px;
+    color: #2864e8;
+}
+
+main.login-layout .login-form-wrap h2 {
+    margin: 0 0 7px;
+    color: #17243b;
+    font-size: clamp(23px, 2.3vw, 28px);
+    line-height: 1.3;
+    letter-spacing: -0.8px;
+}
+
+main.login-layout .login-form-wrap .intro {
+    margin-bottom: 22px;
+    color: #77839a;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+main.login-layout .login-form-wrap form > label {
+    display: block;
+    margin: 0 0 7px;
+    color: #35425a;
+    font-size: 11px;
+    font-weight: 750;
+}
+
+main.login-layout .login-form-wrap input:not([type="checkbox"]) {
+    display: block;
+    width: 100%;
+    height: 42px;
+    margin: 0 0 15px;
+    padding: 0 12px;
+    border: 1px solid #dce2ec;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #17243b;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+main.login-layout .login-form-wrap input::placeholder {
+    color: #a0a9b8;
+}
+
+main.login-layout .login-form-wrap input:focus {
+    border-color: #2864e8;
+    outline: 3px solid rgba(40, 100, 232, 0.12);
+}
+
+main.login-layout .password-wrap {
+    position: relative;
+}
+
+main.login-layout .password-wrap input {
+    padding-right: 85px !important;
+}
+
+main.login-layout .password-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 3px;
+    border: 0;
+    background: transparent;
+    color: #2864e8;
+    font-size: 10px;
+}
+
+main.login-layout .form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 17px;
+}
+
+main.login-layout .check-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0;
+    color: #69758a;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+main.login-layout .check-label input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    accent-color: #2864e8;
+}
+
+main.login-layout .text-button {
+    padding: 3px 0;
+    color: #2864e8;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+main.login-layout .btn-full {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 15px;
+    border: 0;
+    border-radius: 9px;
+    background: #2864e8;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(40, 100, 232, 0.14);
+}
+
+main.login-layout .btn-full:hover {
+    background: #1746b5;
+}
+
+main.login-layout .form-error {
+    margin: 0 0 12px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fff0f0;
+    color: #c63f49;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Akun demo */
+main.login-layout .demo-box {
+    margin-top: 18px;
+    padding: 12px 14px;
+    border: 1px solid #e9edf5;
+    border-radius: 9px;
+    background: #f6f8fc;
+    color: #56647b;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+main.login-layout .demo-box strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #33425d;
+}
+
+main.login-layout .demo-box p {
+    margin: 3px 0;
+}
+
+main.login-layout .login-legal {
+    margin: 16px 0 0;
+    color: #a0a9b8;
+    font-size: 10px;
+    text-align: center;
+}
+
+/* Layar pendek: rapatkan jarak agar lebih muat */
+@media (min-width: 701px) and (max-height: 700px) {
+    main.login-layout .login-brand {
+        padding-top: 22px;
+        padding-bottom: 42px;
+    }
+
+    main.login-layout .brand-mark {
+        width: 38px;
+        height: 38px;
+        margin-bottom: 17px;
+    }
+
+    main.login-layout .login-brand h1 {
+        font-size: 34px;
+    }
+
+    main.login-layout .brand-tagline {
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    main.login-layout .brand-copy {
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    main.login-layout .login-panel {
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+    main.login-layout .welcome-icon {
+        width: 28px;
+        height: 28px;
+        margin-bottom: 9px;
+    }
+
+    main.login-layout .login-form-wrap h2 {
+        font-size: 23px;
+    }
+
+    main.login-layout .login-form-wrap .intro {
+        margin-bottom: 13px;
+    }
+
+    main.login-layout .login-form-wrap input:not([type="checkbox"]) {
+        height: 37px;
+        margin-bottom: 10px;
+    }
+
+    main.login-layout .form-row {
+        margin-bottom: 12px;
+    }
+
+    main.login-layout .btn-full {
+        min-height: 39px;
+        padding: 9px 12px;
+    }
+
+    main.login-layout .demo-box {
+        margin-top: 12px;
+        padding: 9px 12px;
+    }
+
+    main.login-layout .login-legal {
+        margin-top: 10px;
+    }
+}
+
+/* Tampilan HP */
+@media (max-width: 700px) {
+    main.login-layout {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+    }
+
+    main.login-layout .login-brand {
+        display: none;
+    }
+
+    main.login-layout .login-panel {
+        min-height: 100vh;
+        padding: 28px 22px;
+        overflow: visible;
+    }
+
+    main.login-layout .mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 28px;
+        color: #17243b;
+        font-size: 15px;
+    }
+
+    main.login-layout .mobile-brand .brand-mark {
+        width: 38px;
+        height: 38px;
+        margin: 0;
+        border-radius: 11px;
+        background: #2864e8;
+    }
+
+    main.login-layout .login-form-wrap h2 {
+        font-size: 25px;
+    }
+}
