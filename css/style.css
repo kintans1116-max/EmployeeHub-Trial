@@ -2624,3 +2624,47 @@ body main.login-layout .login-form-wrap {
         0 20px 55px rgba(38, 59, 111, 0.08),
         0 3px 10px rgba(38, 59, 111, 0.025);
 }
+/* TEST VISUAL PANEL LOGIN KANAN */
+body main.login-layout > section.login-panel {
+    position: relative !important;
+    isolation: isolate !important;
+    background: linear-gradient(
+        135deg,
+        #eef2ff 0%,
+        #f8faff 50%,
+        #e5edff 100%
+    ) !important;
+    overflow: hidden;
+}
+
+body main.login-layout > section.login-panel::before {
+    content: "";
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    top: -120px;
+    right: -100px;
+    border-radius: 50%;
+    background: rgba(93, 124, 239, 0.15);
+    box-shadow: 0 0 0 35px rgba(93, 124, 239, 0.06);
+    z-index: 0;
+    pointer-events: none;
+}
+
+body main.login-layout > section.login-panel::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    bottom: -120px;
+    left: -80px;
+    border-radius: 50%;
+    background: rgba(147, 130, 255, 0.12);
+    z-index: 0;
+    pointer-events: none;
+}
+
+body main.login-layout > section.login-panel > .login-form-wrap {
+    position: relative !important;
+    z-index: 1 !important;
+}
