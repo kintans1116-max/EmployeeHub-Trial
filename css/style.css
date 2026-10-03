@@ -2555,3 +2555,72 @@ body main.login-layout .login-legal {
         margin-top: 12px;
     }
 }
+
+/* ===== EMPLOYEEHUB: RIGHT PANEL DECORATION ===== */
+
+body main.login-layout > .login-panel {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 95% 10%,
+            rgba(105, 137, 255, 0.13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 5% 95%,
+            rgba(151, 126, 255, 0.10),
+            transparent 32%
+        ),
+        linear-gradient(145deg, #f8faff, #f0f4ff);
+}
+
+/* Lingkaran dekoratif di belakang form */
+body main.login-layout > .login-panel::before {
+    content: "";
+    position: absolute;
+    width: 290px;
+    height: 290px;
+    top: -125px;
+    right: -100px;
+    border: 1px solid rgba(79, 108, 218, 0.13);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 24px rgba(79, 108, 218, 0.035),
+        0 0 0 48px rgba(79, 108, 218, 0.025);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Aksen dekoratif bagian bawah */
+body main.login-layout > .login-panel::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    bottom: -105px;
+    left: -75px;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        rgba(94, 124, 238, 0.10),
+        rgba(162, 147, 255, 0.04)
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Pastikan kartu login tetap berada di atas dekorasi */
+body main.login-layout .login-form-wrap {
+    position: relative;
+    z-index: 1;
+}
+
+/* Kartu sedikit lebih menonjol */
+body main.login-layout .login-form-wrap {
+    border-color: rgba(221, 229, 247, 0.9);
+    box-shadow:
+        0 20px 55px rgba(38, 59, 111, 0.08),
+        0 3px 10px rgba(38, 59, 111, 0.025);
+}
