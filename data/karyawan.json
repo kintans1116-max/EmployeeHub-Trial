@@ -1,1 +1,52 @@
-
+[
+  {
+    "id_karyawan": "051348541",
+    "nama_karyawan": "FARAH FADILLA",
+    "posisi": "Business Analyst"
+  },
+  {
+    "id_karyawan": "050276882",
+    "nama_karyawan": "LUCKY CANDRA PRASETYO",
+    "posisi": "HRD"
+  },
+  {
+    "id_karyawan": "047969031",
+    "nama_karyawan": "PUTRI KINTAN SEPTIANI",
+    "posisi": "Software Engineer"
+  },
+  {
+    "id_karyawan": "049895431",
+    "nama_karyawan": "RIO HARYANTO",
+    "posisi": "Quality Assurance"
+  },
+  {
+    "id_karyawan": "051095401",
+    "nama_karyawan": "SUHENDI",
+    "posisi": "Project Admin"
+  },
+  {
+    "id_karyawan": "052184736",
+    "nama_karyawan": "ANDI PRATAMA",
+    "posisi": "UI/UX Designer"
+  },
+  {
+    "id_karyawan": "053276491",
+    "nama_karyawan": "NADIA PUTRI LESTARI",
+    "posisi": "Data Analyst"
+  },
+  {
+    "id_karyawan": "048365217",
+    "nama_karyawan": "FAJAR RAMADHAN",
+    "posisi": "System Administrator"
+  },
+  {
+    "id_karyawan": "052917364",
+    "nama_karyawan": "SITI AMELIA",
+    "posisi": "Product Manager"
+  },
+  {
+    "id_karyawan": "050638271",
+    "nama_karyawan": "DIMAS ARYANTO",
+    "posisi": "IT Support"
+  }
+]
