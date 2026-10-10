@@ -256,33 +256,44 @@
                             </p>
                         </div>
                     </div>
+<div class="location-status" data-location-status>
 
-                    <div class="attendance-actions">
-                        <button
-                            type="button"
-                            class="btn btn-primary"
-                            id="clockInButton"
-                        >
+    <div>
+        <span class="status-dot"></span>
+        <strong>Lokasi belum diverifikasi</strong>
+    </div>
 
-                            <button
-    type="button"
-    class="btn btn-location"
-    id="simulateLocationButton"
->
-    📍 Simulasikan Lokasi Kantor
-</button>
-                            Absen Masuk
-                        </button>
+    <span>Silakan aktifkan lokasi kantor</span>
 
-                        <button
-                            type="button"
-                            class="btn btn-secondary"
-                            id="clockOutButton"
-                            disabled
-                        >
-                            Absen Pulang
-                        </button>
-                    </div>
+</div>
+                 <div class="attendance-actions">
+
+    <button
+        type="button"
+        class="btn btn-location"
+        id="simulateLocationButton"
+    >
+        📍 Simulasikan Lokasi Kantor
+    </button>
+
+    <button
+        type="button"
+        class="btn btn-primary"
+        id="clockInButton"
+    >
+        Absen Masuk
+    </button>
+
+    <button
+        type="button"
+        class="btn btn-secondary"
+        id="clockOutButton"
+        disabled
+    >
+        Absen Pulang
+    </button>
+
+</div>
 
                     <div
                         id="attendanceMessage"
