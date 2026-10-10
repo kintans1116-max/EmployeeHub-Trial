@@ -5,7 +5,7 @@
 ======================================== */
 
 const ATTENDANCE_STORAGE_KEY = "employeeHubAttendance";
-
+const LOCATION_STORAGE_KEY = "employeeHubDemoLocation";
 document.addEventListener("DOMContentLoaded", function () {
     initAttendance();
 });
@@ -28,9 +28,19 @@ function initAttendance() {
     }
 
     clockInButton?.addEventListener("click", handleClockIn);
-    clockOutButton?.addEventListener("click", handleClockOut);
+clockOutButton?.addEventListener("click", handleClockOut);
 
-    updateAttendanceUI();
+const simulateLocationButton = document.getElementById(
+    "simulateLocationButton"
+);
+
+simulateLocationButton?.addEventListener(
+    "click",
+    simulateOfficeLocation
+);
+
+updateLocationUI();
+updateAttendanceUI();
 }
 
 // Mendapatkan tanggal lokal dalam format YYYY-MM-DD.
@@ -95,11 +105,115 @@ function getTodayAttendance(employeeId) {
             && record.date === today;
     });
 }
+function simulateOfficeLocation() {
+    const locationButton = document.getElementById(
+        "simulateLocationButton"
+    );
 
+    if (!locationButton) {
+        return;
+    }
+
+    localStorage.setItem(
+        LOCATION_STORAGE_KEY,
+        JSON.stringify({
+            valid: true,
+            locationName: "EmployeeHub Office",
+            city: "Jakarta",
+            mode: "demo",
+            simulatedAt: new Date().toISOString()
+        })
+    );
+
+    updateLocationUI();
+
+    showAttendanceMessage(
+        "Lokasi kantor berhasil disimulasikan. Kamu dapat melakukan absensi.",
+        "success"
+    );
+}
+
+
+function isDemoLocationValid() {
+    try {
+        const location = localStorage.getItem(
+            LOCATION_STORAGE_KEY
+        );
+
+        if (!location) {
+            return false;
+        }
+
+        const parsedLocation = JSON.parse(location);
+
+        return parsedLocation.valid === true;
+    } catch (error) {
+        return false;
+    }
+}
+
+
+function updateLocationUI() {
+    const locationButton = document.getElementById(
+        "simulateLocationButton"
+    );
+
+    const locationStatus = document.querySelector(
+        "[data-location-status]"
+    );
+
+    if (!locationButton) {
+        return;
+    }
+
+    const valid = isDemoLocationValid();
+
+    if (valid) {
+        locationButton.textContent = "✓ Lokasi Kantor Aktif";
+        locationButton.disabled = true;
+
+        if (locationStatus) {
+            locationStatus.innerHTML = `
+                <span class="status-dot"></span>
+                <strong>Lokasi valid</strong>
+                <span>EmployeeHub Office • Jakarta</span>
+            `;
+        }
+    } else {
+        locationButton.textContent =
+            "📍 Simulasikan Lokasi Kantor";
+
+        locationButton.disabled = false;
+    }
+}
 // Proses absen masuk.
 function handleClockIn() {
     const user = getCurrentUser();
 
+    if (!user) {
+        showAttendanceMessage(
+            "Silakan login terlebih dahulu.",
+            "error"
+        );
+        return;
+    }
+
+    if (!isDemoLocationValid()) {
+        showAttendanceMessage(
+            "Silakan aktifkan lokasi kantor terlebih dahulu.",
+            "error"
+        );
+        return;
+    }
+
+    const records = getAttendanceRecords();
+   if (!isDemoLocationValid()) {
+    showAttendanceMessage(
+        "Silakan aktifkan lokasi kantor terlebih dahulu.",
+        "error"
+    );
+    return;
+}
     if (!user) {
         showAttendanceMessage(
             "Silakan login terlebih dahulu.",
