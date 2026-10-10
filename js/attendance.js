@@ -30,15 +30,6 @@ function initAttendance() {
     clockInButton?.addEventListener("click", handleClockIn);
 clockOutButton?.addEventListener("click", handleClockOut);
 
-const simulateLocationButton = document.getElementById(
-    "simulateLocationButton"
-);
-
-simulateLocationButton?.addEventListener(
-    "click",
-    simulateOfficeLocation
-);
-
 updateLocationUI();
 updateAttendanceUI();
 }
@@ -105,14 +96,6 @@ function getTodayAttendance(employeeId) {
             && record.date === today;
     });
 }
-function simulateOfficeLocation() {
-    const locationButton = document.getElementById(
-        "simulateLocationButton"
-    );
-
-    if (!locationButton) {
-        return;
-    }
 
     localStorage.setItem(
         LOCATION_STORAGE_KEY,
@@ -135,6 +118,8 @@ function simulateOfficeLocation() {
 
 
 function isDemoLocationValid() {
+    return true;
+}
     try {
         const location = localStorage.getItem(
             LOCATION_STORAGE_KEY
@@ -152,39 +137,23 @@ function isDemoLocationValid() {
     }
 }
 
-
 function updateLocationUI() {
-    const locationButton = document.getElementById(
-        "simulateLocationButton"
-    );
-
     const locationStatus = document.querySelector(
         "[data-location-status]"
     );
 
-    if (!locationButton) {
+    if (!locationStatus) {
         return;
     }
 
-    const valid = isDemoLocationValid();
+    locationStatus.innerHTML = `
+        <div>
+            <span class="status-dot"></span>
+            <strong>Lokasi terverifikasi</strong>
+        </div>
 
-    if (valid) {
-        locationButton.textContent = "✓ Lokasi Kantor Aktif";
-        locationButton.disabled = true;
-
-        if (locationStatus) {
-            locationStatus.innerHTML = `
-                <span class="status-dot"></span>
-                <strong>Lokasi valid</strong>
-                <span>EmployeeHub Office • Jakarta</span>
-            `;
-        }
-    } else {
-        locationButton.textContent =
-            "📍 Simulasikan Lokasi Kantor";
-
-        locationButton.disabled = false;
-    }
+        <span>Anda berada di area kantor</span>
+    `;
 }
 // Proses absen masuk.
 function handleClockIn() {
