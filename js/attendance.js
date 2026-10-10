@@ -97,46 +97,12 @@ function getTodayAttendance(employeeId) {
     });
 }
 
-    localStorage.setItem(
-        LOCATION_STORAGE_KEY,
-        JSON.stringify({
-            valid: true,
-            locationName: "EmployeeHub Office",
-            city: "Jakarta",
-            mode: "demo",
-            simulatedAt: new Date().toISOString()
-        })
-    );
-
-    updateLocationUI();
-
-    showAttendanceMessage(
-        "Lokasi kantor berhasil disimulasikan. Kamu dapat melakukan absensi.",
-        "success"
-    );
-}
-
+   
 
 function isDemoLocationValid() {
     return true;
 }
-    try {
-        const location = localStorage.getItem(
-            LOCATION_STORAGE_KEY
-        );
-
-        if (!location) {
-            return false;
-        }
-
-        const parsedLocation = JSON.parse(location);
-
-        return parsedLocation.valid === true;
-    } catch (error) {
-        return false;
-    }
-}
-
+    
 function updateLocationUI() {
     const locationStatus = document.querySelector(
         "[data-location-status]"
@@ -170,22 +136,6 @@ function handleClockIn() {
     if (!isDemoLocationValid()) {
         showAttendanceMessage(
             "Silakan aktifkan lokasi kantor terlebih dahulu.",
-            "error"
-        );
-        return;
-    }
-
-    const records = getAttendanceRecords();
-   if (!isDemoLocationValid()) {
-    showAttendanceMessage(
-        "Silakan aktifkan lokasi kantor terlebih dahulu.",
-        "error"
-    );
-    return;
-}
-    if (!user) {
-        showAttendanceMessage(
-            "Silakan login terlebih dahulu.",
             "error"
         );
         return;
