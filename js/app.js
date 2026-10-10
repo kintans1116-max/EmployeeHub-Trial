@@ -48,6 +48,7 @@ function initApp() {
 function renderUserInfo(user) {
     const nameElements = document.querySelectorAll("[data-user-name]");
     const idElements = document.querySelectorAll("[data-user-id]");
+    const positionElements = document.querySelectorAll("[data-user-position]");
     const roleElements = document.querySelectorAll("[data-user-role]");
     const initialElements = document.querySelectorAll("[data-user-initial]");
 
@@ -57,6 +58,10 @@ function renderUserInfo(user) {
 
     idElements.forEach(function (element) {
         element.textContent = user.employeeId;
+    });
+
+    positionElements.forEach(function (element) {
+        element.textContent = user.position || "Posisi belum tersedia";
     });
 
     roleElements.forEach(function (element) {
