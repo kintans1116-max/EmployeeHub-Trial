@@ -51,8 +51,7 @@ function initLogin() {
     });
 }
 
-
-function handleLogin() {
+async function handleLogin() {
     const employeeIdInput = document.getElementById("employeeId");
     const passwordInput = document.getElementById("password");
     const rememberMeInput = document.getElementById("rememberMe");
@@ -66,53 +65,93 @@ function handleLogin() {
             "Employee ID dan password wajib diisi.",
             "error"
         );
-
         return;
     }
 
-    const account = demoAccounts.find(function (user) {
-        return (
-            user.employeeId.toLowerCase() === employeeId.toLowerCase() &&
-            user.password === password
-        );
-    });
+    try {
+        // Ambil data karyawan dari file JSON
+        const response = await fetch("data/karyawan.json");
 
-    if (!account) {
+        if (!response.ok) {
+            throw new Error("Data karyawan gagal dimuat.");
+        }
+
+        const karyawan = await response.json();
+
+        // Cari karyawan berdasarkan ID
+        const employee = karyawan.find(
+            user => user.id_karyawan === employeeId
+        );
+
+        if (!employee) {
+            showLoginMessage(
+                "ID karyawan tidak ditemukan.",
+                "error"
+            );
+            passwordInput.value = "";
+            return;
+        }
+
+        // Tentukan role berdasarkan posisi
+        const role = employee.posisi.trim().toUpperCase() === "HRD"
+            ? "admin"
+            : "employee";
+
+        // Validasi password demo
+        if (password !== DEMO_PASSWORDS[role]) {
+            showLoginMessage(
+                "Password tidak sesuai.",
+                "error"
+            );
+            passwordInput.value = "";
+            passwordInput.focus();
+            return;
+        }
+
+        // Siapkan data sesi untuk dashboard
+        const account = {
+            employeeId: employee.id_karyawan,
+            name: employee.nama_karyawan,
+            position: employee.posisi,
+            role: role
+        };
+
+        saveLoginSession(
+            account,
+            rememberMeInput.checked
+        );
+
         showLoginMessage(
-            "Employee ID atau password tidak sesuai.",
+            "Login berhasil. Mengalihkan halaman...",
+            "success"
+        );
+
+        loginButton.disabled = true;
+
+        const buttonText =
+            loginButton.querySelector(".button-text");
+
+        if (buttonText) {
+            buttonText.textContent = "Signing in...";
+        }
+
+        window.setTimeout(function () {
+            if (account.role === "admin") {
+                window.location.href = "approval.html";
+            } else {
+                window.location.href = "dashboard.html";
+            }
+        }, 500);
+
+    } catch (error) {
+        console.error("Login error:", error);
+
+        showLoginMessage(
+            "Data karyawan gagal dimuat. Coba lagi.",
             "error"
         );
-
-        passwordInput.value = "";
-        passwordInput.focus();
-
-        return;
     }
-
-    saveLoginSession(account, rememberMeInput.checked);
-
-    showLoginMessage(
-        "Login berhasil. Mengalihkan ke halaman utama...",
-        "success"
-    );
-
-    loginButton.disabled = true;
-
-    const buttonText = loginButton.querySelector(".button-text");
-
-    if (buttonText) {
-        buttonText.textContent = "Signing in...";
-    }
-
-    window.setTimeout(function () {
-        if (account.role === "admin") {
-            window.location.href = "approval.html";
-        } else {
-            window.location.href = "dashboard.html";
-        }
-    }, 500);
 }
-
 
 /* =========================================
    3. SAVE LOGIN SESSION
