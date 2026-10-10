@@ -142,11 +142,12 @@ async function handleLogin() {
 
 function saveLoginSession(account, rememberMe) {
     const userSession = {
-        employeeId: account.employeeId,
-        name: account.name,
-        role: account.role,
-        loginTime: new Date().toISOString()
-    };
+    employeeId: account.employeeId,
+    name: account.name,
+    position: account.position,
+    role: account.role,
+    loginTime: new Date().toISOString()
+};
 
     // Hapus sesi lama agar tidak ada dua sesi aktif
     // di dua jenis penyimpanan sekaligus.
