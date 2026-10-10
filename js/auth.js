@@ -9,29 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
     initPasswordToggle();
 });
 
-
-/* =========================================
-   1. DEMO ACCOUNTS
-   ========================================= */
-
-// Akun berikut hanya untuk demonstrasi frontend.
-// Jangan gunakan kredensial ini untuk sistem produksi.
-
-const demoAccounts = [
-    {
-        employeeId: "EMP001",
-        password: "Employee123",
-        name: "Demo Employee",
-        role: "employee"
-    },
-    {
-        employeeId: "HR001",
-        password: "Admin123",
-        name: "Demo HR Admin",
-        role: "admin"
-    }
-];
-
+// Password khusus untuk demonstrasi frontend.
+// Jangan gunakan untuk aplikasi produksi.
+const DEMO_PASSWORDS = {
+    employee: "Employee123",
+    admin: "Admin123"
+};
 
 /* =========================================
    2. LOGIN FORM
